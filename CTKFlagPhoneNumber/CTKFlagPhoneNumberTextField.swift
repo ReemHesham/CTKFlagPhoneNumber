@@ -64,7 +64,7 @@ open class CTKFlagPhoneNumberTextField: UITextField, UITextFieldDelegate, Countr
 	private var phoneNumber: String?
 	private var phoneCode: String? {
 		didSet {
-			phoneCodeTextField.text = phoneCode
+			phoneCodeTextField.text = "\(countryCode ?? "") \(phoneCode ?? "")"
 			phoneCodeTextField.sizeToFit()
 			layoutSubviews()
 		}
@@ -208,7 +208,7 @@ open class CTKFlagPhoneNumberTextField: UITextField, UITextFieldDelegate, Countr
 	
 	/// Get the current country phone code
 	public func getCountryPhoneCode() -> String? {
-		return phoneCodeTextField.text
+		return phoneCode
 	}
 	
 	public func getCountryCode() -> String? {

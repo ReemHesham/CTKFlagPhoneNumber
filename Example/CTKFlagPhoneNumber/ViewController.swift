@@ -11,8 +11,9 @@ import CTKFlagPhoneNumber
 
 class ViewController: UIViewController {
 	
-	var phoneNumberTextField: CTKFlagPhoneNumberTextField!
-	
+    var phoneNumberTextField: CTKFlagPhoneNumberTextField!
+//    @IBOutlet weak var phoneNumberTextField: CTKFlagPhoneNumberTextField!
+    
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
@@ -21,8 +22,8 @@ class ViewController: UIViewController {
 		//		To use your own flag icons, uncommment the line :
 		//		Bundle.FlagIcons = Bundle(for: ViewController.self)
 		
-		phoneNumberTextField = CTKFlagPhoneNumberTextField(frame: CGRect(x: 0, y: 0, width: view.bounds.width - 16, height: 50))
-		phoneNumberTextField.borderStyle = .roundedRect
+        phoneNumberTextField = CTKFlagPhoneNumberTextField(frame: CGRect(x: 0, y: 0, width: view.bounds.width - 16, height: 50))
+        phoneNumberTextField.borderStyle = .roundedRect
 
 		//		Custom the size/edgeInsets of the flag button
 		//		phoneNumberTextField.flagSize = CGSize(width: 35, height: 35)

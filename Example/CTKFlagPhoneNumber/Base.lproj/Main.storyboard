@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -20,9 +21,48 @@
                     <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yE9-Qi-glh">
+                                <rect key="frame" x="16" y="318" width="40" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="Ylt-zd-BRy"/>
+                                    <constraint firstAttribute="width" constant="40" id="g90-P8-fWG"/>
+                                </constraints>
+                                <state key="normal" image="RE">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                            </button>
+                            <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qxF-fz-n4y">
+                                <rect key="frame" x="66" y="318" width="25" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="uxt-i5-aOF" customClass="CTKFlagPhoneNumberTextField" customModule="CTKFlagPhoneNumber">
+                                <rect key="frame" x="101" y="318" width="238" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="yE9-Qi-glh" firstAttribute="centerY" secondItem="kh9-bI-dsS" secondAttribute="centerY" id="AfJ-RL-zUu"/>
+                            <constraint firstItem="qxF-fz-n4y" firstAttribute="centerY" secondItem="kh9-bI-dsS" secondAttribute="centerY" id="DgL-K0-0Yi"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="uxt-i5-aOF" secondAttribute="trailing" constant="20" id="K6j-E6-W7U"/>
+                            <constraint firstItem="uxt-i5-aOF" firstAttribute="centerY" secondItem="kh9-bI-dsS" secondAttribute="centerY" id="YHW-kI-FTe"/>
+                            <constraint firstItem="yE9-Qi-glh" firstAttribute="centerY" secondItem="kh9-bI-dsS" secondAttribute="centerY" id="aXY-EC-zIp"/>
+                            <constraint firstItem="uxt-i5-aOF" firstAttribute="leading" secondItem="qxF-fz-n4y" secondAttribute="trailing" constant="10" id="er8-qR-IQM"/>
+                            <constraint firstItem="yE9-Qi-glh" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="lQG-Yh-SEP"/>
+                            <constraint firstItem="qxF-fz-n4y" firstAttribute="leading" secondItem="yE9-Qi-glh" secondAttribute="trailing" constant="10" id="x7j-Qj-eQb"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="4MI-Ap-Diz"/>
+                    <connections>
+                        <outlet property="codeCountryTF" destination="qxF-fz-n4y" id="xYN-7x-KtX"/>
+                        <outlet property="flagButton" destination="yE9-Qi-glh" id="6k7-A9-nep"/>
+                        <outlet property="phoneNumberTextField" destination="uxt-i5-aOF" id="St4-3f-ts4"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
@@ -47,4 +87,7 @@
             <point key="canvasLocation" x="8.8000000000000007" y="-646.32683658170924"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="RE" width="21" height="15"/>
+    </resources>
 </document>

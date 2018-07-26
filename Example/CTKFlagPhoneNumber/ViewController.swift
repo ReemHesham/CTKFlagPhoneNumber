@@ -11,10 +11,12 @@ import CTKFlagPhoneNumber
 
 class ViewController: UIViewController {
 	
-    var phoneNumberTextField: CTKFlagPhoneNumberTextField!
-//    @IBOutlet weak var phoneNumberTextField: CTKFlagPhoneNumberTextField!
+//    var phoneNumberTextField: CTKFlagPhoneNumberTextField!
+    @IBOutlet weak var phoneNumberTextField: CTKFlagPhoneNumberTextField!
     
-	override func viewDidLoad() {
+    @IBOutlet weak var flagButton: UIButton!
+    @IBOutlet weak var codeCountryTF: UITextField!
+    override func viewDidLoad() {
 		super.viewDidLoad()
 		
 		title = "CTKFlagPhoneNumber"
@@ -22,8 +24,11 @@ class ViewController: UIViewController {
 		//		To use your own flag icons, uncommment the line :
 		//		Bundle.FlagIcons = Bundle(for: ViewController.self)
 		
-        phoneNumberTextField = CTKFlagPhoneNumberTextField(frame: CGRect(x: 0, y: 0, width: view.bounds.width - 16, height: 50))
+//        phoneNumberTextField = CTKFlagPhoneNumberTextField(frame: CGRect(x: 0, y: 0, width: view.bounds.width - 16, height: 50))
         phoneNumberTextField.borderStyle = .roundedRect
+//        phoneNumberTextField.flagButton = flagButton
+//        phoneNumberTextField.phoneCodeTextField = codeCountryTF
+        flagButton.setImage(phoneNumberTextField.getCountryFlage(), for: .normal)
 
 		//		Custom the size/edgeInsets of the flag button
 		//		phoneNumberTextField.flagSize = CGSize(width: 35, height: 35)
@@ -50,9 +55,13 @@ class ViewController: UIViewController {
 		//		Set the phone number directly
 		//		phoneNumberTextField.set(phoneNumber: "+60323856789")
 
-		view.addSubview(phoneNumberTextField)
+        flagButton.setImage(phoneNumberTextField.getCountryFlage(), for: .normal)
+        flagButton.imageView?.contentMode = .scaleAspectFit
+        codeCountryTF.text = phoneNumberTextField.getCountryCode()
 
-		phoneNumberTextField.center = view.center
+//        view.addSubview(phoneNumberTextField)
+//
+//        phoneNumberTextField.center = view.center
 		
 		let button = UIButton(type: .system)
 		

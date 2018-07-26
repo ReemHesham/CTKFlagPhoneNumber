@@ -25,28 +25,28 @@ open class CTKFlagPhoneNumberTextField: UITextField, UITextFieldDelegate, Countr
 	}
 	
 	/// The size of the leftView
-	private var leftViewSize: CGSize {
-		let width = flagSize.width + flagButtonEdgeInsets.left + flagButtonEdgeInsets.right + phoneCodeTextField.frame.width
-		let height = bounds.height
+    private var leftViewSize: CGSize {
+        let width = flagSize.width + flagButtonEdgeInsets.left + flagButtonEdgeInsets.right + phoneCodeTextField.frame.width
+        let height = bounds.height
 
-		return CGSize(width: width, height: height)
-	}
+        return CGSize(width: width, height: height)
+    }
 
-	private var phoneCodeTextField: UITextField = UITextField()
+    public var phoneCodeTextField: UITextField = UITextField()
 	private lazy var countryPicker: CountryPicker = CountryPicker()
 	private lazy var phoneUtil: NBPhoneNumberUtil = NBPhoneNumberUtil()
 	private var formatter: NBAsYouTypeFormatter?
 	
-	public var flagButton: UIButton = UIButton()
+    public var flagButton: UIButton = UIButton()
 	open override var font: UIFont? {
 		didSet {
-			phoneCodeTextField.font = font
+            phoneCodeTextField.font = font
 		}
 	}
 	
 	open override var textColor: UIColor? {
 		didSet {
-			phoneCodeTextField.textColor = textColor
+            phoneCodeTextField.textColor = textColor
 		}
 	}
 	
@@ -64,8 +64,8 @@ open class CTKFlagPhoneNumberTextField: UITextField, UITextFieldDelegate, Countr
 	private var phoneNumber: String?
 	private var phoneCode: String? {
 		didSet {
-			phoneCodeTextField.text = "\(countryCode ?? "") \(phoneCode ?? "")"
-			phoneCodeTextField.sizeToFit()
+            phoneCodeTextField.text = "\(countryCode ?? "") \(phoneCode ?? "")"
+            phoneCodeTextField.sizeToFit()
 			layoutSubviews()
 		}
 	}
@@ -76,6 +76,12 @@ open class CTKFlagPhoneNumberTextField: UITextField, UITextFieldDelegate, Countr
 			}
 		}
 	}
+    
+    private var countryFlag: UIImage? {
+        didSet {
+
+        }
+    }
 	
 	/// If set, a search button appears in the picker inputAccessoryView to present a country search view controller
 	public var parentViewController: UIViewController?
@@ -110,21 +116,21 @@ open class CTKFlagPhoneNumberTextField: UITextField, UITextFieldDelegate, Countr
 		super.layoutSubviews()
 		
 		leftView?.frame = leftViewRect(forBounds: frame)
-		flagButton.imageEdgeInsets = flagButtonEdgeInsets
+        flagButton.imageEdgeInsets = flagButtonEdgeInsets
 	}
 	
-	open override func leftViewRect(forBounds bounds: CGRect) -> CGRect {
-		let width: CGFloat = min(bounds.size.width, leftViewSize.width)
-		let height: CGFloat = min(bounds.size.height, leftViewSize.height)
-		let rect: CGRect = CGRect(x: 0, y: 0, width: width, height: height)
+    open override func leftViewRect(forBounds bounds: CGRect) -> CGRect {
+        let width: CGFloat = min(bounds.size.width, leftViewSize.width)
+        let height: CGFloat = min(bounds.size.height, leftViewSize.height)
+        let rect: CGRect = CGRect(x: 0, y: 0, width: width, height: height)
 
-		return rect
-	}
+        return rect
+    }
 	
 	private func setup() {
-		setupFlagButton()
-		setupPhoneCodeTextField()
-		setupLeftView()
+//        setupFlagButton()
+//        setupPhoneCodeTextField()
+//        setupLeftView()
 		setupCountryPicker()
 
 		autocorrectionType = .no
@@ -134,35 +140,36 @@ open class CTKFlagPhoneNumberTextField: UITextField, UITextFieldDelegate, Countr
 	}
 	
 	private func setupFlagButton() {
-		flagButton.contentHorizontalAlignment = .fill
-		flagButton.contentVerticalAlignment = .fill
-		flagButton.imageView?.contentMode = .scaleAspectFit
-		flagButton.accessibilityLabel = "flagButton"
-		flagButton.addTarget(self, action: #selector(displayCountryKeyboard), for: .touchUpInside)
-		flagButton.translatesAutoresizingMaskIntoConstraints = false
-		flagButton.setContentHuggingPriority(UILayoutPriority.defaultLow, for: .horizontal)
+        flagButton.isUserInteractionEnabled = false
+        flagButton.contentHorizontalAlignment = .fill
+        flagButton.contentVerticalAlignment = .fill
+        flagButton.imageView?.contentMode = .scaleAspectFit
+        flagButton.accessibilityLabel = "flagButton"
+        flagButton.addTarget(self, action: #selector(displayCountryKeyboard), for: .touchUpInside)
+        flagButton.translatesAutoresizingMaskIntoConstraints = false
+        flagButton.setContentHuggingPriority(UILayoutPriority.defaultLow, for: .horizontal)
 	}
 	
 	private func setupPhoneCodeTextField() {
-		phoneCodeTextField.isUserInteractionEnabled = false
-		phoneCodeTextField.translatesAutoresizingMaskIntoConstraints = false
-		phoneCodeTextField.setContentHuggingPriority(UILayoutPriority.defaultHigh, for: .horizontal)
+        phoneCodeTextField.isUserInteractionEnabled = false
+        phoneCodeTextField.translatesAutoresizingMaskIntoConstraints = false
+        phoneCodeTextField.setContentHuggingPriority(UILayoutPriority.defaultHigh, for: .horizontal)
 	}
 	
 	private func setupLeftView() {
-		leftViewMode = UITextFieldViewMode.always
-		leftView = UIView()
-		leftView?.addSubview(flagButton)
-		leftView?.addSubview(phoneCodeTextField)
+        leftViewMode = UITextFieldViewMode.always
+        leftView = UIView()
+        leftView?.addSubview(flagButton)
+        leftView?.addSubview(phoneCodeTextField)
 
-		let views = ["flag": flagButton, "textField": phoneCodeTextField]
-		let horizontalConstraints = NSLayoutConstraint.constraints(withVisualFormat: "H:|[flag]-(0)-[textField]|", options: [], metrics: nil, views: views)
+        let views = ["flag": flagButton, "textField": phoneCodeTextField]
+        let horizontalConstraints = NSLayoutConstraint.constraints(withVisualFormat: "H:|[flag]-(0)-[textField]|", options: [], metrics: nil, views: views)
 
-		leftView?.addConstraints(horizontalConstraints)
-		
-		for key in views.keys {
-			leftView?.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[\(key)]|", options: [], metrics: nil, views: views))
-		}
+        leftView?.addConstraints(horizontalConstraints)
+
+        for key in views.keys {
+            leftView?.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[\(key)]|", options: [], metrics: nil, views: views))
+        }
 	}
 	
 	private func setupCountryPicker() {
@@ -214,6 +221,10 @@ open class CTKFlagPhoneNumberTextField: UITextField, UITextFieldDelegate, Countr
 	public func getCountryCode() -> String? {
 		return countryCode
 	}
+    
+    public func getCountryFlage() -> UIImage? {
+        return countryFlag
+    }
 
 	/// Get the current raw phone number
 	public func getRawPhoneNumber() -> String? {
@@ -377,7 +388,8 @@ open class CTKFlagPhoneNumberTextField: UITextField, UITextFieldDelegate, Countr
 	// - CountryPickerDelegate
 
 	public func countryPhoneCodePicker(_ picker: CountryPicker, didSelectCountryWithName name: String, countryCode: String, phoneCode: String, flag: UIImage) {
-		flagButton.setImage(flag, for: .normal)
+        self.countryFlag = flag
+        flagButton.setImage(flag, for: .normal)
 		self.countryCode = countryCode
 	
 		reload(with: phoneCode)
@@ -388,8 +400,9 @@ open class CTKFlagPhoneNumberTextField: UITextField, UITextFieldDelegate, Countr
 	internal func didSelect(country: Country) {
 		guard let phoneCode = country.phoneCode else { return }
 		guard let countryCode = country.code else { return }
-
-		flagButton.setImage(country.flag, for: .normal)
+        guard let countryFlag = country.flag else { return }
+        self.countryFlag = countryFlag
+        flagButton.setImage(country.flag, for: .normal)
 		self.countryCode = countryCode
 		
 		reload(with: phoneCode)
